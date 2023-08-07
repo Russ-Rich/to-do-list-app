@@ -1,31 +1,46 @@
-function newItem() {
+$(document).ready(function () {
+	function addItem() {
+		// Input
+		let inputValue = $("#input").val().trim();
 
-  // 1. Adding a new item to the list:
-  let inputValue = $('#input').val();
+		if (inputValue === "") {
+			alert("Fart Noise");
+		} else {
+			// Creates a new list item to add it to the list
+			let li = $("<li></li>").text(inputValue);
+			$("#list").append(li);
 
-  if (inputValue === '') {
-    alert("Bruh, you gotta write something!");
-  } else {
-    let li = $('<li></li>');
-    li.append(inputValue);
-    $('#list').append(li);
+			// Crossing an item out:
+			li.on("dblclick", function () {
+				$(this).toggleClass("strike");
+			});
 
-    // 2. Crossing out an item from the list:
-    li.on("dblclick", function() {
-      li.toggleClass("strike");
-    });
+			// Adds the "X" delete button
+			let crossOutButton = $("<button>X</button>");
+			li.append(crossOutButton);
 
-    // 3(i). Adding the delete button "X":
-    let crossOutButton = $('<crossOutButton>X</crossOutButton>'); 
-    // Directly added 'X' instead of creating a text node. It's shorter and sweeter!
-    li.append(crossOutButton);
+			// Removes the item when "X" is clicked
+			crossOutButton.on("click", function () {
+				$(this).parent().addClass("delete");
+			});
 
-    // 3(ii). Remove the item when "X" is clicked:
-    crossOutButton.on("click", function() {
-      li.addClass("delete");
-    });
-  }
+			// Resets input field
+			$("#input").val("");
+		}
 
-  // 4. Reordering the items: 
-  $('#list').sortable();
-}
+		// Click and hold to reorder items
+		$("#list").sortable();
+	}
+
+	// When the "Add" button is clicked
+	$("#button").on("click", addItem);
+
+	// When the "Return" key is pressed inside the input field
+	$("#input").on("keypress", function (e) {
+		if (e.which == 13) {
+			// "13" is the code for the Enter key because in the ASCII table, the "Carriage Return" is represented by the number 13
+			addItem();
+			e.preventDefault(); // Prevents the default action
+		}
+	});
+});
