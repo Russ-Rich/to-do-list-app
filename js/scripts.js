@@ -1,46 +1,44 @@
 $(document).ready(function () {
+	// Function to add an item to the list
 	function addItem() {
-		// Input
-		let inputValue = $("#input").val().trim();
+		const inputValue = $("#input").val().trim();
 
 		if (inputValue === "") {
-			alert("Fart Noise");
+			showAlert("Please enter an item.");
 		} else {
-			// Creates a new list item to add it to the list
-			let li = $("<li></li>").text(inputValue);
-			$("#list").append(li);
+			const li = $("<li></li>").text(inputValue);
 
-			// Crossing an item out:
 			li.on("dblclick", function () {
 				$(this).toggleClass("strike");
 			});
 
-			// Adds the "X" delete button
-			let crossOutButton = $("<button>X</button>");
-			li.append(crossOutButton);
+			const crossOutButton = $('<i class="far fa-trash-alt"></i>');
 
-			// Removes the item when "X" is clicked
 			crossOutButton.on("click", function () {
 				$(this).parent().addClass("delete");
 			});
 
-			// Resets input field
+			li.append(crossOutButton);
+			$("#list").append(li);
 			$("#input").val("");
 		}
 
-		// Click and hold to reorder items
-		$("#list").sortable();
+		$("#list").sortable(); // Click and hold to reorder items
 	}
 
-	// When the "Add" button is clicked
+	// Event listener for clicking the "Add" button
 	$("#button").on("click", addItem);
 
-	// When the "Return" key is pressed inside the input field
+	// Event listener for pressing the "Return" key inside the input field
 	$("#input").on("keypress", function (e) {
-		if (e.which == 13) {
-			// "13" is the code for the Enter key because in the ASCII table, the "Carriage Return" is represented by the number 13
+		if (e.which === 13) {
 			addItem();
-			e.preventDefault(); // Prevents the default action
+			e.preventDefault();
 		}
 	});
+
+	// Custom alert function
+	function showAlert(message) {
+		$("#custom-alert").text(message).fadeIn().delay(2000).fadeOut();
+	}
 });

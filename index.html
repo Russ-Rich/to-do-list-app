@@ -3,28 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
-		<title>repl.it</title>
-		<link href="css/styles.css" rel="stylesheet" type="text/css" />
-	</head>
-
-	<body>
-		<div class="container">
-			<h1>To Do List</h1>
-			<p>
-				<em>
-					Double click to mark an item off, click on "X" to delete an item, and drag items
-					to reorder.</em
-				>
-			</p>
-
-			<form name="toDoList">
-				<label> List Item<input type="text" name="ListItem" id="input" /></label>
-			</form>
-
-			<div onclick="newItem()" id="button">Add</div>
-			<br />
-			<ol id="list"></ol>
-		</div>
+		<title>To Do List App</title>
 		<script
 			src="https://code.jquery.com/jquery-3.5.1.js"
 			integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
@@ -33,6 +12,36 @@
 			src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
 			integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
 			crossorigin="anonymous"></script>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css"
+			integrity="sha512-BnbUDfEUfV0Slx6TunuB042k9tuKe3xrD6q4mg5Ed72LTgzDIcLPxg6yI2gcMFRyomt+yJJxE+zJwNmxki6/RA=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer" />
+		<link rel="stylesheet" href="css/index.css" />
+	</head>
+	<body>
+		<div id="custom-alert" class="alert"></div>
+		<div class="container">
+			<h1>To Do List App</h1>
+			<p id="instruction">
+				👉 Double click to mark an item off <br />
+				👉 Click on bin icon to delete an item <br />
+				👉 Drag items to reorder.
+			</p>
+
+			<div class="form-wrapper">
+				<form name="toDoList">
+					<input type="text" placeholder="✍ Add Item..." name="ListItem" id="input" />
+				</form>
+				<div onclick="newItem()" id="button">
+					<i class="fas fa-plus"></i>
+				</div>
+			</div>
+
+			<br />
+			<ol class="numbered-list" id="list"></ol>
+		</div>
 		<script src="js/scripts.js"></script>
 	</body>
 </html>
